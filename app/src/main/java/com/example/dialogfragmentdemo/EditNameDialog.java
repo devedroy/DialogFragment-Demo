@@ -1,14 +1,12 @@
 package com.example.dialogfragmentdemo;
 
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,7 +34,9 @@ public class EditNameDialog extends DialogFragment {
         mEditText.setOnEditorActionListener((textView, actionId, keyEvent) -> {
             if (EditorInfo.IME_ACTION_DONE == actionId) {
                 EditNameDialogListener activity = (EditNameDialogListener) getActivity();
-                activity.onFinishEditDialog(mEditText.getText().toString());
+                if (activity != null) {
+                    activity.onFinishEditDialog(mEditText.getText().toString());
+                }
                 return true;
             }
             return false;
