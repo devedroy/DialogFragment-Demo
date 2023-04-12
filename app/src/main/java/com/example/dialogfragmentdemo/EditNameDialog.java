@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import androidx.fragment.app.DialogFragment;
 
 public class EditNameDialog extends DialogFragment {
     private EditText mEditText;
+    private TextView mTextView;
 
     public EditNameDialog() {
         super();
@@ -24,7 +26,8 @@ public class EditNameDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_edit_name, container);
-        mEditText = (EditText) view.findViewById(R.id.txt_your_name);
+        mEditText = view.findViewById(R.id.txt_your_name);
+        mTextView = view.findViewById(R.id.lbl_your_name);
 
         getDialog().setTitle("Hello");
 
@@ -35,7 +38,7 @@ public class EditNameDialog extends DialogFragment {
             if (EditorInfo.IME_ACTION_DONE == actionId) {
                 EditNameDialogListener activity = (EditNameDialogListener) getActivity();
                 if (activity != null) {
-                    activity.onFinishEditDialog(mEditText.getText().toString());
+                    activity.onFinishEditDialog(mTextView.getText().toString(), mEditText.getText().toString());
                 }
                 return true;
             }
